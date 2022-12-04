@@ -3,8 +3,13 @@ import { FC } from "react";
 import { CurrentWeather } from "./Map";
 import {
   StyledCard,
+  StyledColumn,
+  StyledDate,
+  StyledDescription,
   StyledDivider,
   StyledFeatureText,
+  StyledH1,
+  StyledWeatherImage,
   StyledWrapper,
 } from "./weatherCardStyles";
 
@@ -17,23 +22,23 @@ const WeatherCard: FC<WeatherCardProps> = ({ data }) => {
     <>
       {data && (
         <StyledCard>
+          <StyledH1>{data.name}</StyledH1>
           {data.weather.map((item) => (
             <StyledWrapper>
-              <div>
-                <h1>{data.name}</h1>
-                <p>{item.description}</p>
-                <StyledFeatureText>
-                  {Math.round(data?.main.temp * 10) / 10} &deg;
-                </StyledFeatureText>
-                <p>{moment.unix(data?.dt).calendar()}</p>
-              </div>
-              <StyledDivider />
-              <div>
-                <img
+              <StyledColumn>
+                <StyledDate>{moment.unix(data?.dt).calendar()}</StyledDate>
+                <StyledWeatherImage
                   alt={item.description}
                   src={`http://openweathermap.org/img/wn/${item.icon}@4x.png`}
                 />
-              </div>
+                <StyledDescription>{item.description}</StyledDescription>
+              </StyledColumn>
+              <StyledDivider />
+              <StyledColumn style={{ flexGrow: 1 }}>
+                <StyledFeatureText>
+                  {Math.round(data?.main.temp * 10) / 10} &deg;
+                </StyledFeatureText>
+              </StyledColumn>
             </StyledWrapper>
           ))}
         </StyledCard>

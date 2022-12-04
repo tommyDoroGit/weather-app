@@ -4,6 +4,7 @@ import { useQuery, useQueryClient } from "react-query";
 import Map from "react-map-gl";
 import moment from "moment";
 import WeatherCard from "./WeatherCard";
+import { RotatingSquare } from "react-loader-spinner";
 
 const WEATHER_KEY = "bb8923d7f7a30863af45a523873ad2ae";
 // const WEATHER_KEY = "6dc9c2a99870e8a1a5ff5c72ecc15d4e"; //their key
@@ -73,6 +74,27 @@ const WeatherMap = () => {
 
   return (
     <>
+      {!data && (
+        <div
+          style={{
+            height: "100vh",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <RotatingSquare
+            height="100"
+            width="100"
+            color="#de856f"
+            ariaLabel="rotating-square-loading"
+            strokeWidth="4"
+            wrapperStyle={{}}
+            wrapperClass=""
+            visible={true}
+          />
+        </div>
+      )}
       {location !== undefined && !isIdle && (
         <>
           {data && <WeatherCard {...data} />}
@@ -90,7 +112,7 @@ const WeatherMap = () => {
             onDblClick={(e) => {
               setLocation(e.lngLat as any);
             }}
-            style={{ height: "100vh" }}
+            style={{ height: "calc(100vh - 3rem)" }}
             {...mapState}
           />
         </>
