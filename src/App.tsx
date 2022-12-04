@@ -21,7 +21,7 @@ function App() {
           }}
         >
           <a
-            href="http://tommydorogit.github.io/weather-app"
+            href="https://github.com/tommyDoroGit/weather-app"
             style={{ paddingRight: "1rem" }}
             target="_blank"
             rel="noreferrer"

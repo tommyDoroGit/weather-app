@@ -1,13 +1,12 @@
 import axios from "axios";
-import { useEffect, useMemo, useState } from "react";
-import { useQuery, useQueryClient } from "react-query";
+import { useEffect, useState } from "react";
+import { useQuery } from "react-query";
 import Map from "react-map-gl";
-import moment from "moment";
 import WeatherCard from "./WeatherCard";
+import MapKey from "./MapKey";
 import { RotatingSquare } from "react-loader-spinner";
 
 const WEATHER_KEY = "bb8923d7f7a30863af45a523873ad2ae";
-// const WEATHER_KEY = "6dc9c2a99870e8a1a5ff5c72ecc15d4e"; //their key
 const MAPBOX_KEY =
   "pk.eyJ1IjoidG9tZG9yb3plbmtvIiwiYSI6ImNsYjY2bWltaTBjcnczbnBnZm53dXo5eWgifQ.ecVr9lXBbar_rgZyz8CBoQ";
 
@@ -110,11 +109,12 @@ const WeatherMap = () => {
               setMapState(e.viewState);
             }}
             onDblClick={(e) => {
-              setLocation(e.lngLat as any);
+              setLocation(e.lngLat);
             }}
             style={{ height: "calc(100vh - 3rem)" }}
             {...mapState}
           />
+          <MapKey />
         </>
       )}
     </>
