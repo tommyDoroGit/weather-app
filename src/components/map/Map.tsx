@@ -48,7 +48,6 @@ const WeatherMap = () => {
     ["getWeather", location],
     () => location && getWeather(location),
     {
-      // Refetch the data every second
       refetchOnWindowFocus: false,
       refetchInterval: 60000,
     }
@@ -58,7 +57,6 @@ const WeatherMap = () => {
     if (!isLocationSet) {
       navigator.geolocation.getCurrentPosition(
         (coordinates) => {
-          console.log("location", coordinates);
           setLocation({
             lng: coordinates.coords.longitude,
             lat: coordinates.coords.latitude,
