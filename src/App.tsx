@@ -20,7 +20,12 @@ function App() {
             alignItems: "center",
           }}
         >
-          <a href="www.google.com" style={{ paddingRight: "1rem" }}>
+          <a
+            href="http://tommydorogit.github.io/weather-app"
+            style={{ paddingRight: "1rem" }}
+            target="_blank"
+            rel="noreferrer"
+          >
             <AiFillGithub size="2em" color="rgb(235,99,61)" />
           </a>
         </footer>
