@@ -5,6 +5,14 @@ import Map from "react-map-gl";
 import WeatherCard from "./WeatherCard";
 import MapKey from "./MapKey";
 import { RotatingSquare } from "react-loader-spinner";
+import styled from "styled-components";
+
+const Wrapper = styled.div`
+  height: 100vh;
+  display: flex;
+  justifyContent: center;
+  alignItems: center;
+`
 
 const WEATHER_KEY = "bb8923d7f7a30863af45a523873ad2ae";
 const MAPBOX_KEY =
@@ -69,16 +77,11 @@ const WeatherMap = () => {
     }
   }, [isIdle, isLocationSet, data?.data.dt]);
 
+  // @ts-ignore
   return (
     <>
-      {!data && (
-        <div
-          style={{
-            height: "100vh",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
+      {!isLocationSet && (
+        <Wrapper
         >
           <RotatingSquare
             height="100"
@@ -90,11 +93,12 @@ const WeatherMap = () => {
             wrapperClass=""
             visible={true}
           />
-        </div>
+        </Wrapper>
       )}
       {location !== undefined && !isIdle && (
         <>
-          {data && <WeatherCard {...data} />}
+          {/*@ts-ignore*/}
+          <WeatherCard {...data} />
           <Map
             initialViewState={{
               longitude: location?.lng,
@@ -107,6 +111,9 @@ const WeatherMap = () => {
               setMapState(e.viewState);
             }}
             onDblClick={(e) => {
+              setLocation(e.lngLat);
+            }}
+            onTouchEnd={(e) => {
               setLocation(e.lngLat);
             }}
             style={{ height: "calc(100vh - 3rem)" }}
