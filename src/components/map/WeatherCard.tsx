@@ -17,20 +17,21 @@ import {RotatingSquare} from "react-loader-spinner";
 import {AxiosResponse} from "axios";
 
 interface WeatherCardProps {
-  data: CurrentWeather | undefined;
+  data:  AxiosResponse<CurrentWeather, any> | undefined
 }
 
 const WeatherCard: FC<WeatherCardProps> = ({ data }) => {
 
+
   return (
         <StyledCard>
-          {data ? (
+          {data?.data ? (
           <>
-          <StyledH1>{data.name}</StyledH1>
-          {data.weather.map((item) => (
+          <StyledH1>{data?.data.name}</StyledH1>
+          {data?.data.weather.map((item) => (
             <StyledWrapper>
               <StyledColumn>
-                <StyledDate>{moment.unix(data?.dt).calendar()}</StyledDate>
+                <StyledDate>{moment.unix(data?.data.dt).calendar()}</StyledDate>
                 <ImageContainer>
                 <StyledWeatherImage
                   alt={item.description}
@@ -42,7 +43,7 @@ const WeatherCard: FC<WeatherCardProps> = ({ data }) => {
               <StyledDivider />
               <StyledColumn style={{ flexGrow: 1 }}>
                 <StyledFeatureText>
-                  {Math.round(data?.main.temp * 10) / 10} &deg;
+                  {Math.round(data?.data.main.temp * 10) / 10} &deg;
                 </StyledFeatureText>
               </StyledColumn>
             </StyledWrapper>

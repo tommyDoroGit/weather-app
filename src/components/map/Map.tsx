@@ -97,8 +97,7 @@ const WeatherMap = () => {
       )}
       {location !== undefined && !isIdle && (
         <>
-          {/*@ts-ignore*/}
-          <WeatherCard {...data} />
+          <WeatherCard data={data} />
           <Map
             initialViewState={{
               longitude: location?.lng,
